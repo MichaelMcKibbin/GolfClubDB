@@ -1,0 +1,31 @@
+@page
+@model GolfClubDB.Pages.Bookings.IndexModel
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h1 class="mb-3">Bookings</h1>
+
+<p>
+    <a class="btn btn-primary" asp-page="./Create">Create Booking</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Member</th>
+            <th>Date</th>
+            <th>Tee Time</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var booking in Model.Bookings)
+    {
+        <tr>
+            <td>@booking.Member?.Name</td>
+            <td>@booking.BookingDate.ToString("yyyy-MM-dd")</td>
+            <td>@booking.TeeTime.ToString("HH:mm")</td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,10 +1,31 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="bg-light rounded-3 p-4 mb-4">
+    <h1 class="display-6">Golf Club Database</h1>
+    <p class="lead">Manage members and tee time bookings in one place.</p>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Members</h5>
+                <p class="card-text">Create, edit, and track membership details.</p>
+                <a class="btn btn-primary" asp-page="/Members/Index">View Members</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Bookings</h5>
+                <p class="card-text">Schedule tee times and manage daily bookings.</p>
+                <a class="btn btn-primary" asp-page="/Bookings/Index">View Bookings</a>
+            </div>
+        </div>
+    </div>
 </div>

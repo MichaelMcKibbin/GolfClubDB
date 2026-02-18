@@ -1,0 +1,60 @@
+@page
+@model GolfClubDB.Pages.Members.IndexModel
+@{
+    ViewData["Title"] = "Members";
+}
+
+<h1 class="mb-3">Members</h1>
+
+<form method="get" class="row g-3 align-items-end mb-4">
+    <div class="col-md-3">
+        <label class="form-label" asp-for="GenderFilter">Gender</label>
+        <select class="form-select" asp-for="GenderFilter" asp-items="Model.GenderOptions">
+            <option value="">All</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" asp-for="HandicapMin">Handicap Min</label>
+        <input class="form-control" asp-for="HandicapMin" type="number" min="0" max="54" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" asp-for="HandicapMax">Handicap Max</label>
+        <input class="form-control" asp-for="HandicapMax" type="number" min="0" max="54" />
+    </div>
+    <div class="col-md-3">
+        <button class="btn btn-primary" type="submit">Apply Filters</button>
+        <a class="btn btn-outline-secondary" asp-page="./Index">Reset</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort" asp-route-GenderFilter="@Model.GenderFilter" asp-route-HandicapMin="@Model.HandicapMin" asp-route-HandicapMax="@Model.HandicapMax">
+                    Name
+                </a>
+            </th>
+            <th>Membership #</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.HandicapSort" asp-route-GenderFilter="@Model.GenderFilter" asp-route-HandicapMin="@Model.HandicapMin" asp-route-HandicapMax="@Model.HandicapMax">
+                    Handicap
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var member in Model.Members)
+    {
+        <tr>
+            <td>@member.Name</td>
+            <td>@member.MembershipNumber</td>
+            <td>@member.Email</td>
+            <td>@member.Gender</td>
+            <td>@member.Handicap</td>
+        </tr>
+    }
+    </tbody>
+</table>
