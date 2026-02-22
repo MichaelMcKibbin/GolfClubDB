@@ -83,6 +83,8 @@
                 }
 
                 <div class="form-group mt-3">
+                    <a asp-page="./Index" asp-route-memberId="@Model.Booking.MemberId" class="btn btn-info">View Member's Bookings</a>
+                    <a asp-page="./Delete" asp-route-id="@Model.Booking.Id" class="btn btn-danger">Delete Booking</a>
                     <a asp-page="./Index" class="btn btn-secondary">Back to Bookings</a>
                 </div>
             </div>

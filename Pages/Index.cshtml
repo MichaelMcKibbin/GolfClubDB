@@ -4,27 +4,74 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="bg-light rounded-3 p-4 mb-4">
-    <h1 class="display-6">Golf Club Database</h1>
-    <p class="lead">Manage members and tee time bookings in one place.</p>
+<style>
+    .home-hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/golf-background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        color: white;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .home-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        margin-bottom: 20px;
+    }
+
+    .home-hero p {
+        font-size: 1.5rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    }
+
+    .home-content {
+        padding: 40px 0;
+    }
+
+    .card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="home-hero">
+    <div>
+        <h1>Golf Club Database</h1>
+        <p>Manage members and tee time bookings in one place</p>
+    </div>
 </div>
 
-<div class="row g-3">
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Members</h5>
-                <p class="card-text">Create, edit, and track membership details.</p>
-                <a class="btn btn-primary" asp-page="/Members/Index">View Members</a>
+<div class="home-content">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">👥 Members</h5>
+                    <p class="card-text">Create, edit, and track membership details with comprehensive profiles.</p>
+                    <a class="btn btn-primary" asp-page="/Members/Index">View Members</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">Bookings</h5>
-                <p class="card-text">Schedule tee times and manage daily bookings.</p>
-                <a class="btn btn-primary" asp-page="/Bookings/Index">View Bookings</a>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">📅 Bookings</h5>
+                    <p class="card-text">Schedule tee times and manage daily bookings for up to 4 players.</p>
+                    <a class="btn btn-primary" asp-page="/Bookings/Index">View Bookings</a>
+                </div>
             </div>
         </div>
     </div>
