@@ -18,10 +18,38 @@ public class Member
     public string Email { get; set; } = string.Empty;
 
     [Required]
+    [Phone]
+    public string PhoneNumber { get; set; } = string.Empty;
+
+    public DateTime DateOfBirth { get; set; }
+
+    [Required]
+    public DateTime MembershipStartDate { get; set; }
+
+    public DateTime? MembershipEndDate { get; set; }
+
+    public string? ProfileImage { get; set; }
+    public string? Bio { get; set; }
+
+    public string? EmergencyContactName { get; set; }
+
+    public string? EmergencyContactPhone { get; set; }
+
+    public string StreetAddress { get; set; } = string.Empty;
+
+    public string StreetAddress2 { get; set; } = string.Empty;
+
+    public string TownAddress { get; set; } = string.Empty;
+
+    public string CountyAddress { get; set; } = string.Empty;
+
+    public string Postcode { get; set; } = string.Empty;
+
+    [Required]
     public string Gender { get; set; } = string.Empty;
 
     [Required]
-    [Range(0, 54)]
+    [Range(-20, 54)]
     public int Handicap { get; set; }
 
     public ICollection<Booking> Bookings { get; set; } = new List<Booking>();

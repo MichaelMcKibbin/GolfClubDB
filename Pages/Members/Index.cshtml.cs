@@ -15,6 +15,7 @@ public class IndexModel(ApplicationDbContext context) : PageModel
     public string? CurrentSort { get; set; }
     public string? NameSort { get; set; }
     public string? HandicapSort { get; set; }
+    public string? MembershipNumberSort { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public string? GenderFilter { get; set; }
@@ -33,6 +34,7 @@ public class IndexModel(ApplicationDbContext context) : PageModel
 
         NameSort = sortOrder == "name_desc" ? "name_asc" : "name_desc";
         HandicapSort = sortOrder == "handicap_desc" ? "handicap_asc" : "handicap_desc";
+        MembershipNumberSort = sortOrder == "membernumber_desc" ? "membernumber_asc" : "membernumber_desc";
 
         GenderOptions = new SelectList(await _context.Members
             .AsNoTracking()
@@ -63,6 +65,8 @@ public class IndexModel(ApplicationDbContext context) : PageModel
             "name_desc" => membersQuery.OrderByDescending(m => m.Name),
             "handicap_asc" => membersQuery.OrderBy(m => m.Handicap),
             "handicap_desc" => membersQuery.OrderByDescending(m => m.Handicap),
+            "membernumber_asc" => membersQuery.OrderBy(m => m.MembershipNumber),
+            "membernumber_desc" => membersQuery.OrderByDescending(m => m.MembershipNumber),
             _ => membersQuery.OrderBy(m => m.Name)
         };
 

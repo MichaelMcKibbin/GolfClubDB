@@ -1,0 +1,128 @@
+﻿@page "{id:int}"
+@model ViewModel
+
+@{
+    ViewData["Title"] = "View Member";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ViewData["Title"]</h1>
+            <hr />
+
+            <div>
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipNumber" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.MembershipNumber</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Name" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.Name</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Email" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.Email</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.PhoneNumber" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.PhoneNumber</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Gender" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.Gender</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.DateOfBirth" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(Model.Member.DateOfBirth == default ? "Not specified" : Model.Member.DateOfBirth.ToString("dd/MM/yyyy"))</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Handicap" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.Handicap</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipStartDate" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.MembershipStartDate.ToString("dd/MM/yyyy")</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipEndDate" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(Model.Member.MembershipEndDate == null ? "Active" : Model.Member.MembershipEndDate.Value.ToString("dd/MM/yyyy"))</div>
+                </div>
+
+                <hr />
+                <h5>Address Information</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.StreetAddress" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.StreetAddress</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.StreetAddress2" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(string.IsNullOrEmpty(Model.Member.StreetAddress2) ? "N/A" : Model.Member.StreetAddress2)</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.TownAddress" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.TownAddress</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.CountyAddress" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.CountyAddress</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Postcode" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@Model.Member.Postcode</div>
+                </div>
+
+                <hr />
+                <h5>Additional Information</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Bio" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default; min-height: 100px; white-space: pre-wrap;">@(string.IsNullOrEmpty(Model.Member.Bio) ? "N/A" : Model.Member.Bio)</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.ProfileImage" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(string.IsNullOrEmpty(Model.Member.ProfileImage) ? "N/A" : Model.Member.ProfileImage)</div>
+                </div>
+
+                <hr />
+                <h5>Emergency Contact</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.EmergencyContactName" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(string.IsNullOrEmpty(Model.Member.EmergencyContactName) ? "N/A" : Model.Member.EmergencyContactName)</div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.EmergencyContactPhone" class="form-label"></label>
+                    <div class="form-control" style="background-color: #f8f9fa; cursor: default;">@(string.IsNullOrEmpty(Model.Member.EmergencyContactPhone) ? "N/A" : Model.Member.EmergencyContactPhone)</div>
+                </div>
+
+                <div class="form-group">
+                    <a asp-page="./Edit" asp-route-id="@Model.Member.Id" class="btn btn-primary">Edit</a>
+                    <a asp-page="../Bookings/Index" asp-route-memberId="@Model.Member.Id" class="btn btn-info">View Member's Bookings</a>
+                    <a asp-page="Index" class="btn btn-secondary">Return to Members</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -4,26 +4,67 @@
     ViewData["Title"] = "Members";
 }
 
-<h1 class="mb-3">Members</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.css" />
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Members</h1>
+    <a asp-page="./Create" class="btn btn-success">+ Add New Member</a>
+</div>
 
 <form method="get" class="row g-3 align-items-end mb-4">
-    <div class="col-md-3">
-        <label class="form-label" asp-for="GenderFilter">Gender</label>
-        <select class="form-select" asp-for="GenderFilter" asp-items="Model.GenderOptions">
-            <option value="">All</option>
-        </select>
+    <div class="col-md-3 mb-4 mr-5">
+        <label class="form-label">Gender</label>
+        <div class="radio-group">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="GenderFilter" value="" id="genderAll" checked="@(string.IsNullOrEmpty(Model.GenderFilter))" />
+                <label class="form-check-label" for="genderAll">All</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="GenderFilter" value="Male" id="genderMale" />
+                <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="GenderFilter" value="Female" id="genderFemale" />
+                <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <label class="form-label" asp-for="HandicapMin">Handicap Min</label>
-        <input class="form-control" asp-for="HandicapMin" type="number" min="0" max="54" />
-    </div>
-    <div class="col-md-3">
-        <label class="form-label" asp-for="HandicapMax">Handicap Max</label>
-        <input class="form-control" asp-for="HandicapMax" type="number" min="0" max="54" />
-    </div>
-    <div class="col-md-3">
-        <button class="btn btn-primary" type="submit">Apply Filters</button>
-        <a class="btn btn-outline-secondary" asp-page="./Index">Reset</a>
+    <div class="col-md-6 ml-5">
+        <label class="form-label">Handicap Range</label>
+        
+        <!-- Preset Handicap Range Options -->
+        <div style="margin-bottom: 15px; display: flex; gap: 25px; flex-wrap: wrap;">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-all" value="all" />
+                <label class="form-check-label" for="handicap-range-all">All</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-low" value="low" />
+                <label class="form-check-label" for="handicap-range-low">Below 10</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-medium" value="medium" />
+                <label class="form-check-label" for="handicap-range-medium">11 to 20</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-high" value="high" />
+                <label class="form-check-label" for="handicap-range-high">Above 20</label>
+            </div>
+        </div>
+
+        <div id="handicapSlider" style="margin: 20px 20px 0;"></div>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <div>
+                <small class="text-muted">Min:</small>
+                <span id="handicapMinValue" style="font-weight: bold;">-20</span>
+            </div>
+            <div>
+                <small class="text-muted">Max:</small>
+                <span id="handicapMaxValue" style="font-weight: bold;">54</span>
+            </div>
+        </div>
+        <input type="hidden" asp-for="HandicapMin" id="handicapMinInput" />
+        <input type="hidden" asp-for="HandicapMax" id="handicapMaxInput" />
     </div>
 </form>
 
@@ -35,7 +76,11 @@
                     Name
                 </a>
             </th>
-            <th>Membership #</th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.MembershipNumberSort" asp-route-GenderFilter="@Model.GenderFilter" asp-route-HandicapMin="@Model.HandicapMin" asp-route-HandicapMax="@Model.HandicapMax">
+                    Membership #
+                </a>
+            </th>
             <th>Email</th>
             <th>Gender</th>
             <th>
@@ -43,6 +88,7 @@
                     Handicap
                 </a>
             </th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -54,7 +100,86 @@
             <td>@member.Email</td>
             <td>@member.Gender</td>
             <td>@member.Handicap</td>
+            <td>
+                    <a asp-page="./View" asp-route-id="@member.Id" class="btn btn-sm btn-success">View</a>
+                <a asp-page="./Edit" asp-route-id="@member.Id" class="btn btn-sm btn-primary">Edit</a>
+                <a asp-page("./Delete" asp-route-id="@member.Id" class="btn btn-sm btn-danger">Delete</a>
+            </td>
         </tr>
     }
     </tbody>
 </table>
+
+<script src="https://cdn.jsdelivr.net/npm/nouislider@15.7.1/dist/nouislider.min.js"></script>
+<script>
+    // Initialize the handicap range slider
+    const handicapSlider = document.getElementById('handicapSlider');
+    const handicapMinInput = document.getElementById('handicapMinInput');
+    const handicapMaxInput = document.getElementById('handicapMaxInput');
+    const handicapMinValue = document.getElementById('handicapMinValue');
+    const handicapMaxValue = document.getElementById('handicapMaxValue');
+
+    const minVal = handicapMinInput.value ? parseInt(handicapMinInput.value) : -20;
+    const maxVal = handicapMaxInput.value ? parseInt(handicapMaxInput.value) : 54;
+
+    noUiSlider.create(handicapSlider, {
+        start: [minVal, maxVal],
+        connect: true,
+        range: {
+            'min': -20,
+            'max': 54
+        },
+        step: 1
+    });
+
+    handicapSlider.noUiSlider.on('update', function(values, handle) {
+        const minValue = Math.round(values[0]);
+        const maxValue = Math.round(values[1]);
+        
+        handicapMinValue.textContent = minValue;
+        handicapMaxValue.textContent = maxValue;
+        handicapMinInput.value = minValue;
+        handicapMaxInput.value = maxValue;
+    });
+
+    handicapSlider.noUiSlider.on('change', function() {
+        document.querySelector('form').submit();
+    });
+
+    // Preset handicap range options
+    const handicapRangeButtons = document.querySelectorAll('input[name="handicapRange"]');
+    handicapRangeButtons.forEach(button => {
+        button.addEventListener('change', function() {
+            let min, max;
+            switch(this.value) {
+                case 'low':
+                    min = -20;
+                    max = 10;
+                    break;
+                case 'medium':
+                    min = 11;
+                    max = 20;
+                    break;
+                case 'high':
+                    min = 21;
+                    max = 54;
+                    break;
+                case 'all':
+                    min = -20;
+                    max = 54;
+                    break;
+                default:
+                    return;
+            }
+            handicapSlider.noUiSlider.set([min, max]);
+            // Submit form after setting the range
+            document.querySelector('form').submit();
+        });
+    });
+
+    document.querySelectorAll('input[name="GenderFilter"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.querySelector('form').submit();
+        });
+    });
+</script>

@@ -8,8 +8,17 @@ html {
   }
 }
 
+/* Global Color Variables */
+:root {
+  --color-primary: #4cff00;
+  --color-secondary: #6c757d;
+  --color-border: #3a52b0;
+  --color-border-light: #4068c7;
+  --color-white: #ffffff;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem var(--color-white), 0 0 0 0.25rem var(--color-primary);
 }
 
 html {
@@ -28,4 +37,21 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+/* Radio Button Group Styling */
+.radio-group {
+
+    padding: 5px 5px 5px 25px;
+}
+
+
+.radio-group .form-check:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.radio-group .form-check-label {
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
 }

@@ -1,0 +1,153 @@
+@page "{id:int}"
+@model EditModel
+
+@{
+    ViewData["Title"] = "Edit Member";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@ViewData["Title"]</h1>
+            <hr />
+
+            <form method="post">
+                <input type="hidden" asp-for="Member.Id" />
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipNumber" class="form-label"></label>
+                    <input asp-for="Member.MembershipNumber" class="form-control" readonly />
+                    <small class="form-text text-muted">Membership number cannot be changed</small>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Name" class="form-label"></label>
+                    <input asp-for="Member.Name" class="form-control" required />
+                    <span asp-validation-for="Member.Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Email" class="form-label"></label>
+                    <input asp-for="Member.Email" type="email" class="form-control" required />
+                    <span asp-validation-for="Member.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.PhoneNumber" class="form-label"></label>
+                    <input asp-for="Member.PhoneNumber" type="tel" class="form-control" required />
+                    <span asp-validation-for="Member.PhoneNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Gender" class="form-label"></label>
+                    <select asp-for="Member.Gender" class="form-select" required>
+                        <option value="">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        
+                    </select>
+                    <span asp-validation-for="Member.Gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.DateOfBirth" class="form-label"></label>
+                    <input asp-for="Member.DateOfBirth" type="date" class="form-control" />
+                    <span asp-validation-for="Member.DateOfBirth" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Handicap" class="form-label"></label>
+                    <input asp-for="Member.Handicap" type="number" class="form-control" min="-20" max="54" required />
+                    <small class="form-text text-muted">Handicap must be between -20 and 54</small>
+                    <span asp-validation-for="Member.Handicap" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipStartDate" class="form-label"></label>
+                    <input asp-for="Member.MembershipStartDate" type="date" class="form-control" required />
+                    <span asp-validation-for="Member.MembershipStartDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.MembershipEndDate" class="form-label"></label>
+                    <input asp-for="Member.MembershipEndDate" type="date" class="form-control" />
+                    <small class="form-text text-muted">Leave blank if membership is active</small>
+                </div>
+
+                <hr />
+                <h5>Address Information</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.StreetAddress" class="form-label"></label>
+                    <input asp-for="Member.StreetAddress" class="form-control" required />
+                    <span asp-validation-for="Member.StreetAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.StreetAddress2" class="form-label"></label>
+                    <input asp-for="Member.StreetAddress2" class="form-control" />
+                    <small class="form-text text-muted">Apartment, suite, etc. (optional)</small>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.TownAddress" class="form-label"></label>
+                    <input asp-for="Member.TownAddress" class="form-control" required />
+                    <span asp-validation-for="Member.TownAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.CountyAddress" class="form-label"></label>
+                    <input asp-for="Member.CountyAddress" class="form-control" required />
+                    <span asp-validation-for="Member.CountyAddress" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Postcode" class="form-label"></label>
+                    <input asp-for="Member.Postcode" class="form-control" required />
+                    <span asp-validation-for="Member.Postcode" class="text-danger"></span>
+                </div>
+
+                <hr />
+                <h5>Additional Information</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.Bio" class="form-label"></label>
+                    <textarea asp-for="Member.Bio" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Member.Bio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.ProfileImage" class="form-label"></label>
+                    <input asp-for="Member.ProfileImage" class="form-control" />
+                    <span asp-validation-for="Member.ProfileImage" class="text-danger"></span>
+                </div>
+
+                <hr />
+                <h5>Emergency Contact</h5>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.EmergencyContactName" class="form-label"></label>
+                    <input asp-for="Member.EmergencyContactName" class="form-control" />
+                    <span asp-validation-for="Member.EmergencyContactName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="Member.EmergencyContactPhone" class="form-label"></label>
+                    <input asp-for="Member.EmergencyContactPhone" type="tel" class="form-control" />
+                    <span asp-validation-for="Member.EmergencyContactPhone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

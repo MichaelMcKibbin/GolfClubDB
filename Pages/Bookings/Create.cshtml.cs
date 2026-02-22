@@ -18,6 +18,9 @@ public class CreateModel(ApplicationDbContext context) : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
+        // Set default booking date to today
+        Booking.BookingDate = DateOnly.FromDateTime(DateTime.Today);
+        
         await LoadMembersAsync();
         return Page();
     }
