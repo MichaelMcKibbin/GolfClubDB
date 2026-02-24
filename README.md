@@ -247,7 +247,7 @@ Stores golf course booking information:
    dotnet run
    ```
 
-6. Open `https://localhost:5001`
+6. Open `https://localhost:7055` or `http://localhost:5203`
 
 ### Database Reset & Reseed (Development Only)
 To clear all data and start fresh with new seed data:
@@ -268,12 +268,18 @@ If you need to move the database, update the `AttachDbFilename` path in `appsett
 
 
 ### Screenshots
-
-![Home Page](HomePage.png)
-![Members Page](MembersPage.png)
-![Add Member Page](AddMember.png)
-![Edit Member Page](EditMember.png)
-![Bookings Page](BookingsPage.png)
-![Booking Details Page](BookingDetails.png)
-![Create Booking Page](CreateBooking.png)
+#### Home page (index)
+![Home Page](Screenshots/HomePage.png)
+#### Members page
+![Members Page](Screenshots/MembersPage.png)
+#### Add member page
+![Add Member Page](Screenshots/AddMember.png)
+#### Edit member page
+![Edit Member Page](Screenshots/EditMember.png)
+#### Bookings page
+![Bookings Page](Screenshots/BookingsPage.png)
+#### Booking details page
+![Booking Details Page](Screenshots/BookingDetails.png)
+#### Create booking page
+![Create Booking Page](Screenshots/CreateBooking.png)
 
