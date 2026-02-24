@@ -10,8 +10,12 @@ public class Member
     public string MembershipNumber { get; set; } = string.Empty;
 
     [Required]
-    [StringLength(100)]
-    public string Name { get; set; } = string.Empty;
+    [StringLength(50)]
+    public string FirstName { get; set; } = string.Empty;
+
+    [Required]
+    [StringLength(50)]
+    public string LastName { get; set; } = string.Empty;
 
     [Required]
     [EmailAddress]

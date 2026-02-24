@@ -62,12 +62,12 @@ public class IndexModel(ApplicationDbContext context) : PageModel
 
         membersQuery = sortOrder switch
         {
-            "name_desc" => membersQuery.OrderByDescending(m => m.Name),
+            "name_desc" => membersQuery.OrderByDescending(m => m.LastName).ThenByDescending(m => m.FirstName),
             "handicap_asc" => membersQuery.OrderBy(m => m.Handicap),
             "handicap_desc" => membersQuery.OrderByDescending(m => m.Handicap),
             "membernumber_asc" => membersQuery.OrderBy(m => m.MembershipNumber),
             "membernumber_desc" => membersQuery.OrderByDescending(m => m.MembershipNumber),
-            _ => membersQuery.OrderBy(m => m.Name)
+            _ => membersQuery.OrderBy(m => m.LastName).ThenBy(m => m.FirstName)
         };
 
         Members = await membersQuery.ToListAsync();

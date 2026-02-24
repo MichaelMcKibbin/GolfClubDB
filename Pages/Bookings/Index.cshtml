@@ -12,7 +12,7 @@
 @if (Model.FilteredMember != null)
 {
     <div class="alert alert-info mb-3 d-flex justify-content-between align-items-center">
-        <span>Showing bookings for: <strong>@Model.FilteredMember.Name</strong></span>
+        <span>Showing bookings for: <strong>@Model.FilteredMember.LastName, @Model.FilteredMember.FirstName</strong></span>
         <a class="btn btn-sm btn-outline-secondary" asp-page="./Index">Show All Bookings</a>
     </div>
 }
@@ -29,7 +29,7 @@
     @foreach (var booking in Model.Bookings)
     {
         <tr style="cursor: pointer;" onclick="window.location.href='@Url.Page("./View", new { id = booking.Id })'">
-            <td>@booking.Member?.Name</td>
+            <td>@booking.Member?.LastName, @booking.Member?.FirstName</td>
             <td>@booking.BookingDate.ToString("yyyy-MM-dd")</td>
             <td>@booking.TeeTime.ToString("HH:mm")</td>
         </tr>

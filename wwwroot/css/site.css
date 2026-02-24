@@ -1,3 +1,7 @@
+/*
+    See also bootstrap.css
+*/
+
 html {
   font-size: 14px;
 }
@@ -6,15 +10,6 @@ html {
   html {
     font-size: 16px;
   }
-}
-
-/* Global Color Variables */
-:root {
-  --color-primary: #4cff00;
-  --color-secondary: #6c757d;
-  --color-border: #3a52b0;
-  --color-border-light: #4068c7;
-  --color-white: #ffffff;
 }
 
 .home-hero {
@@ -47,9 +42,16 @@ html {
 .home-content {
   padding: 40px 0;
 }
+.home-link-to-repo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem var(--color-white), 0 0 0 0.25rem var(--color-primary);
+    box-shadow: 0 0 0 0.1rem var(--bs-white), 0 0 0 0.25rem var(--bs-primary);
 }
 
 html {
@@ -58,9 +60,9 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: #f6f8fb;
-  color: #1f2a44;
+    margin-bottom: 60px;
+    background-color: var(--bs-info-bg-subtle);
+    color: #1f2a44;
 }
 
 .navbar {
@@ -68,15 +70,19 @@ body {
 }
 
 .card {
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(31, 42, 68, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(31, 42, 68, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 24px rgba(31, 42, 68, 0.14);
+}
+
+.card[onclick] {
+  cursor: pointer;
 }
 
 .table {
@@ -120,13 +126,13 @@ body {
 
 .form-control,
 .form-select {
-  border-radius: 8px;
-  border-color: #d6dbe4;
+    border-radius: 8px;
+    border-color: --bs-secondary-border-subtle;
 }
 
 .form-control:focus,
 .form-select:focus {
-  border-color: #9fb3ff;
+  border-color: --bs-primary-border-subtle;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

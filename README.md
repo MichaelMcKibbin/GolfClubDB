@@ -5,10 +5,10 @@ A comprehensive web application for managing golf club members and their booking
 ## Overview
 
 GolfClubDB is a full-featured golf club management system that enables administrators to:
-- Manage comprehensive member profiles with 15+ data fields
+- Manage comprehensive member profiles with 18 data fields
 - Track member handicaps and booking history
 - Create and manage golf course bookings with up to 4 players per booking
-- Filter and sort members by gender, handicap range, name, and membership number
+- Filter and sort members by gender, handicap/handicap range, name, and membership number
 - View booking details and member associations
 - Prevent duplicate bookings and maintain data integrity
 
@@ -56,13 +56,13 @@ The application includes **automatic seed data** that populates on first run:
 - Multiple dates and configurations for comprehensive testing
 - Member IDs reference the 10 sample members
 
-**Seed data is only created once** - when the database is empty. After that, you can add your own data.
+**Seed data is only created once** - when the database is empty. After that, you can add your own data and edit or delete the seed data.
 
 ### Database Schema
 
 #### Members Table
 Stores comprehensive member information:
-- **Basic Info**: ID, Name, Email, Phone Number, Gender
+- **Basic Info**: ID, Name (Last, First), Email, Phone Number, Gender
 - **Membership**: Membership Number (unique, auto-generated with GC prefix), Membership Start Date, Membership End Date
 - **Golf**: Handicap (-20 to 54 range)
 - **Personal**: Date of Birth (defaults to 01/01/1901)
@@ -110,7 +110,7 @@ Stores golf course booking information:
 - Auto-submits on selection
 
 ### Member Details
-- **Complete Profile**: All 15+ fields displayed in organized sections
+- **Complete Profile**: All 18 fields displayed in organized sections
 - **Date Formatting**: Formatted as dd/MM/yyyy
 - **Sections**: Basic Info, Address Info, Additional Info, Emergency Contact
 - **Navigation**: Edit, View Member's Bookings, Return buttons
@@ -167,7 +167,7 @@ Stores golf course booking information:
 - **Duplicate Check**: Prevents same member booking same day
 - **Validation**: Client-side + Server-side
 
-## Original Assignment Requirements [x]
+## Original Assignment Requirements
 
 ### CRUD Operations
 - [x] Create (Members & Bookings)
@@ -205,12 +205,12 @@ Stores golf course booking information:
 
 - [x] Advanced handicap slider with live preview
 - [x] Auto-submitting filters (no "Apply" button)
-- [x] Preset + custom handicap ranges
+- [x] Preset and custom handicap ranges
 - [x] Sortable table headers
 - [x] Global CSS color variables
 - [x] Organized form sections
 - [x] Auto-filling form fields
-- [x] Comprehensive member profiles (15+ fields)
+- [x] Comprehensive member profiles (18 fields)
 - [x] Member-specific booking views
 - [x] Responsive Bootstrap 5 design
 
@@ -265,3 +265,15 @@ This removes the database and recreates it with the default seed data.
 - **Log File**: `GCDB_log.ldf`
 
 If you need to move the database, update the `AttachDbFilename` path in `appsettings.json`.
+
+
+### Screenshots
+
+![Home Page](HomePage.png)
+![Members Page](MembersPage.png)
+![Add Member Page](AddMember.png)
+![Edit Member Page](EditMember.png)
+![Bookings Page](BookingsPage.png)
+![Booking Details Page](BookingDetails.png)
+![Create Booking Page](CreateBooking.png)
+

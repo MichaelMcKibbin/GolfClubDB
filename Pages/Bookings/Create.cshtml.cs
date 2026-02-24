@@ -67,9 +67,15 @@ public class CreateModel(ApplicationDbContext context) : PageModel
     {
         var members = await _context.Members
             .AsNoTracking()
-            .OrderBy(m => m.Name)
+            .OrderBy(m => m.LastName)
+            .ThenBy(m => m.FirstName)
             .ToListAsync();
 
-        MemberOptions = new SelectList(members, nameof(Member.Id), nameof(Member.Name));
+        // Create display text as "LastName, FirstName"
+        MemberOptions = new SelectList(
+            members.Select(m => new { m.Id, DisplayName = $"{m.LastName}, {m.FirstName}" }),
+            nameof(Member.Id),
+            "DisplayName"
+        );
     }
 }
