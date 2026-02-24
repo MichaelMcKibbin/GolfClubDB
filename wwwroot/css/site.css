@@ -17,14 +17,15 @@ html {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  min-height: 400px;
+  min-height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 12px;
   color: white;
   text-align: center;
-  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .home-hero h1 {
@@ -40,14 +41,17 @@ html {
 }
 
 .home-content {
-  padding: 40px 0;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+  margin-top: -120px;
 }
 .home-link-to-repo {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.0rem;
+    font-weight: 500;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
