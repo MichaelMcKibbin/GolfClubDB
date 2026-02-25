@@ -40,7 +40,7 @@
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-low" value="low" />
-                <label class="form-check-label" for="handicap-range-low">Below 10</label>
+                <label class="form-check-label" for="handicap-range-low">10 and below</label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="handicapRange" id="handicap-range-medium" value="medium" />
@@ -181,5 +181,22 @@
         radio.addEventListener('change', function() {
             document.querySelector('form').submit();
         });
+    });
+
+    // Restore the correct handicap range radio button based on current filter
+    window.addEventListener('DOMContentLoaded', function() {
+        const min = parseInt(handicapMinInput.value) || -20;
+        const max = parseInt(handicapMaxInput.value) || 54;
+        
+        if (min === -20 && max === 54) {
+            document.getElementById('handicap-range-all').checked = true;
+        } else if (min === -20 && max === 10) {
+            document.getElementById('handicap-range-low').checked = true;
+        } else if (min === 11 && max === 20) {
+            document.getElementById('handicap-range-medium').checked = true;
+        } else if (min === 21 && max === 54) {
+            document.getElementById('handicap-range-high').checked = true;
+        }
+        // If custom range, leave all unchecked
     });
 </script>

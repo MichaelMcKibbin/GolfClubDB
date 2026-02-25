@@ -45,16 +45,16 @@ The application uses **SQL Server LocalDB** for data persistence:
 ### Seed Data
 The application includes **automatic seed data** that populates on first run:
 
-**10 Sample Members** (IDs 1-10):
-- Diverse mix of genders, skill levels (handicap 2-25)
+**20 Sample Members** (IDs 1-20):
+- Diverse mix of genders, skill levels (handicaps range from -5 to 51)
 - Complete profiles with address, emergency contact, bio
 - Membership dates ranging from 5 years ago to 3 months ago
 
-**20 Sample Bookings** (various dates starting tomorrow):
+**48 Sample Bookings** (various dates starting tomorrow):
 - Bookings with 0, 1, 2, and 3 additional players (full groups)
 - Tee times throughout the day (7:00 AM - 5:15 PM)
 - Multiple dates and configurations for comprehensive testing
-- Member IDs reference the 10 sample members
+- Member IDs reference the sample members
 
 **Seed data is only created once** - when the database is empty. After that, you can add your own data and edit or delete the seed data.
 
@@ -103,7 +103,7 @@ Stores golf course booking information:
 
 **Handicap Range Filter**:
 - **All**: -20 to 54
-- **Below 10**: -20 to 10
+- **10 and below**: -20 to 10
 - **11 to 20**: 11 to 20
 - **Above 20**: 21 to 54
 - **Custom Range**: Interactive dual-handle slider with live preview
@@ -181,7 +181,7 @@ Stores golf course booking information:
 - [x] Email
 - [x] Gender
 - [x] Handicap
-- [x] **Plus**: Phone, DOB, Address, Emergency Contact, Bio, Profile Image
+- [x] Plus: Phone, DOB, Address, Emergency Contact, Bio, Profile Image
 
 ### Tee Time Bookings
 - [x] 15-minute intervals (7 AM - 6 PM)
@@ -192,7 +192,7 @@ Stores golf course booking information:
 
 ### Database Queries
 - [x] Gender filter (All, Male, Female)
-- [x] Handicap ranges (Below 10, 11-20, Above 20, Custom)
+- [x] Handicap ranges (10 and Below, 11-20, Above 20, Custom)
 - [x] Member bookings view
 - [x] Sorting by Name, Handicap, **Membership #**
 
@@ -231,11 +231,10 @@ Stores golf course booking information:
 
 2. Open in Visual Studio and build
 
-3. Create the database folder:
-   ```powershell
-   New-Item -ItemType Directory -Path "D:\VisualStudioLocal\GolfClubDB\DB" -Force
-   ```
-
+3. Create the database folder:  
+The DB folder is included in the repo structure and should be created on cloning the repo  
+If the DB folder does not exist, create it in the GolfClubDB folder
+   
 4. Apply migrations:
    ```
    dotnet ef database update
@@ -266,7 +265,13 @@ This removes the database and recreates it with the default seed data.
 
 If you need to move the database, update the `AttachDbFilename` path in `appsettings.json`.
 
+#### Drop the database from LocalDB
+If you want to delete the database and restart, perhaps with changed seed data, the following command may be useful:
 
+```
+sqlcmd -S "(localdb)\mssqllocaldb" -Q "ALTER DATABASE [GCDB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE [GCDB];"
+```
+Then delete the physical database files from the DB directory, but remember to keep the empty DB directory
 ### Screenshots
 #### Home page (index)
 ![Home Page](Screenshots/HomePage.png)
